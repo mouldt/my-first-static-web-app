@@ -1,7 +1,13 @@
 {
-    "azureFunctions.deploySubpath": "api/bin/Release/netcoreapp3.1/publish",
-    "azureFunctions.projectLanguage": "C#",
+    "azureFunctions.deploySubpath": "api-js",
+    "azureFunctions.projectLanguage": "JavaScript",
     "azureFunctions.projectRuntime": "~3",
     "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.preDeployTask": "publish"
+    "azureFunctions.preDeployTask": "npm prune",
+    "azureFunctions.postDeployTask": "npm install",
+    "liveServer.settings.proxy": {
+        "enable": true,
+        "baseUri": "/api-js",
+        "proxyUri": "http://127.0.0.1:7071/api-js"
+    }
 }
