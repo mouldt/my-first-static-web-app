@@ -9,5 +9,6 @@
         "enable": true,
         "baseUri": "/api-js",
         "proxyUri": "http://127.0.0.1:7071/api-js"
-    }
+    },
+    "azureFunctions.projectSubpath": "api-js"
 }

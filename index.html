@@ -15,9 +15,62 @@
   </main>
 </body>
 <script>
+    var bTokenObtained = false;
+    document.querySelector('#name').textContent = bTokenObtained;
+    let data = {
+      name: 'Sara'
+    }
+    let fetchData = { 
+      credentials: 'include',
+      method: 'GET', 
+      //mode: 'no-cors',
+      headers: {
+        'SmartMelonAPI': 'SmartMelonAPI'
+      }
+    }
+    var host = 'https://smartmelon-api20200903155723.azurewebsites.net'
+    //var host = 'https://localhost:5001'
+    var url = host + '/api/authentication/token'
+    fetch(url, fetchData)
+    .then(function(response){
+      if (response.ok)
+      {
+        bTokenObtained = true;
+        document.querySelector('#name').textContent = bTokenObtained;
+        CallAPI()
+      }
+    })
+    .catch(function(error){
+      bTokenObtained = false;
+      document.querySelector('#name').textContent = bTokenObtained;
+      console.log(error)
+    });
+
+    function CallAPI() {
+      url = host + '/api/smartmelon/test'
+      fetch(url, { 
+          credentials: 'include',
+          method: 'POST', 
+          body: data,
+          //mode: 'no-cors',
+          headers: {
+          'SmartMelonAPI': 'somevalue'
+          }
+        })
+      .then((resp)=>resp.text())
+      .then(function(data){
+        document.querySelector('#name').textContent = data;
+      })
+      .catch(function(error){
+        console.log(error)
+      })
+    }
+
+/*
   (async function() {
-    let {text} = await( await fetch('/api/GetMessage')).json();
+    let {text} = await( await fetch('/api-js/GetMessage')).json();
     document.querySelector('#name').textContent = text;
   }())
+  */
 </script>
 </html>
